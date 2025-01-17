@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import connectDB from './config/db';
 import config from './config/config';
-import userRoutes from './routes/userRoutes';
+import userRoutes from './routes/user.routes';
 
 //execute express
 const app = express();
