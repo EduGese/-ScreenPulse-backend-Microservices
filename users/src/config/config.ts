@@ -8,7 +8,11 @@ const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD || '';
 const MONGODB_CLUSTER = process.env.MONGODB_CLUSTER || '';
 const MONGODB_COLLECTION = process.env.MONGODB_COLLECTION || '';
 
+
 const MONGODB_URL = `mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@${MONGODB_CLUSTER}.mongodb.net/${MONGODB_COLLECTION}?retryWrites=true&w=majority`
+
+//Mongo Local conection
+const MONGODB_LOCAL_URL = `mongodb://localhost:27017/${process.env.MONGODB_DB_LOCAL}`
 
 const SERVER_PORT = process.env.PORT ? Number(process.env.PORT) : 5000;
 
@@ -28,7 +32,7 @@ if(process.env.NODE_ENV ==='production'){
 
 const config = {
     mongo: {
-        url: MONGODB_URL
+        url: MONGODB_LOCAL_URL
     },
     server: {
         port: SERVER_PORT
