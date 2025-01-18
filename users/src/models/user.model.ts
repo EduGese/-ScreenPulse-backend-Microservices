@@ -14,18 +14,11 @@ const UserSchema: Schema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    
   },
   role: {
     type: String,
     default: "regular",
-  },
-  favorites: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Favorites",
-    },
-  ],
+  }
 });
 
 export default mongoose.model<User>("User", UserSchema);
