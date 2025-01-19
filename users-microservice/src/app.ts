@@ -21,12 +21,16 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
+// Mongodb conection
+connectDB();
+
 //routes
 app.use('/api/users', userRoutes);
 
 // server listenening on config.server.port
 app.listen(port, () => {
   console.log('Server is running on port', port);
+  console.log('Environment:', config.env);
 });
 
 // Mongodb conection

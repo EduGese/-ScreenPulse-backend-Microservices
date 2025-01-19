@@ -2,44 +2,36 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-//Variables
-const MONGODB_USER = process.env.MONGODB_USER ||'';
-const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD || '';
-const MONGODB_CLUSTER = process.env.MONGODB_CLUSTER || '';
-const MONGODB_COLLECTION = process.env.MONGODB_COLLECTION || '';
+// Detect environment in use
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 
-const MONGODB_URL = `mongodb+srv://${MONGODB_USER}:${MONGODB_PASSWORD}@${MONGODB_CLUSTER}.mongodb.net/${MONGODB_COLLECTION}?retryWrites=true&w=majority`
+//Select variables depending on environment
+const MONGODB_URL =
+    NODE_ENV === 'production'
+        ? process.env.PROD_MONGODB_URL
+        : process.env.DEV_MONGODB_URL;
 
-//Mongo Local conection
-const MONGODB_LOCAL_URL = `mongodb://localhost:27017/${process.env.MONGODB_DB_LOCAL}`
+const CLIENT_URL =
+    NODE_ENV === 'production'
+        ? process.env.PROD_CLIENT_URL
+        : process.env.DEV_CLIENT_URL;
 
-const SERVER_PORT = process.env.PORT ? Number(process.env.PORT) : 5000;
+//Server Port
+const PORT = process.env.PORT ? Number(process.env.PORT) : 5000;
 
-let CLIENT_URL = ''
-
-//CORS ENV
-if(process.env.NODE_ENV ==='production'){
- CLIENT_URL = process.env.CLIENT_URL_PROD || '';
-
-}else if(process.env.NODE_ENV ==='test'){
- CLIENT_URL = process.env.CLIENT_URL_TEST || '';
-}else{
- CLIENT_URL = process.env.CLIENT_URL_DEV || '';
-}
-
-//config object
-
+//centralized config
 const config = {
-    mongo: {
-        url: MONGODB_LOCAL_URL
-    },
+    env: NODE_ENV,
     server: {
-        port: SERVER_PORT
+        port: PORT,
+    },
+    mongo: {
+        url: MONGODB_URL || '',
     },
     client: {
-        url: CLIENT_URL,
-    }
-}
+        url: CLIENT_URL || '',
+    },
+};
 
 export default config;

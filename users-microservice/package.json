@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "src/app.ts",
   "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon --watch src --ext ts --exec ts-node src/app.ts",
     "type-check": "tsc --noEmit",
-    "test": "npm run type-check && jest",
-    "start": "nodemon src/app.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "start": "cross-env NODE_ENV=production node dist/app.js"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +26,7 @@
     "@types/express": "^5.0.0",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/mongoose": "^5.11.97",
+    "cross-env": "^7.0.3",
     "nodemon": "^3.1.9",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
