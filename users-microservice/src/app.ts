@@ -33,5 +33,3 @@ app.listen(port, () => {
   console.log('Environment:', config.env);
 });
 
-// Mongodb conection
-connectDB();

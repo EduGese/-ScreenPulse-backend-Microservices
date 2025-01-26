@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import connectDB from './config/db';
 import config from './config/config';
-import userRoutes from './routes/favorites.routes';
+import favoritesRoutes from './routes/favorites.routes';
 
 //execute express
 const app = express();
@@ -25,13 +25,10 @@ app.use(express.json());
 connectDB();
 
 //routes
-app.use('/api/favorites', userRoutes);
+app.use('/api/favorites', favoritesRoutes);
 
 // server listenening on config.server.port
 app.listen(port, () => {
   console.log('Server is running on port', port);
   console.log('Environment:', config.env);
 });
-
-// Mongodb conection
-connectDB();
