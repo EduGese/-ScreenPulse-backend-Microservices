@@ -25,7 +25,7 @@ app.use(express.json());
 connectDB();
 
 //routes
-app.use('/api/favorites', favoritesRoutes);
+app.use('/api', favoritesRoutes);
 
 // server listenening on config.server.port
 app.listen(port, () => {
