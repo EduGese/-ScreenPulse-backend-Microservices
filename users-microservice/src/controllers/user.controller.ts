@@ -31,6 +31,22 @@ class UserController {
       // next(error);
     }
   }
+
+  async verifyUserExist(req: Request, res: Response, next: NextFunction) {
+    try {
+      const userId = req.params.userId;
+      console.log("UserId",userId);
+      const response = await UserService.verifyUserExist(userId);
+      console.log("Response",response);
+      res.json(response);
+    } catch (error: any) {
+      res.status(404).json({ 
+        error: "User not found", 
+        message: error.message 
+      });
+      // next(error);
+    }
+  }
 }
 
 export default new UserController();
