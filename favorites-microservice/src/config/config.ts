@@ -17,6 +17,11 @@ const CLIENT_URL =
         ? process.env.PROD_CLIENT_URL
         : process.env.DEV_CLIENT_URL;
 
+const USERS_MICROSERVICE_URL =
+    NODE_ENV === 'production'
+        ? process.env.PROD_USERS_MICROSERVICES_URL
+        : process.env.DEV_USERS_MICROSERVICES_URL;
+
 //Server Port
 const PORT = process.env.PORT ? Number(process.env.PORT) : 5001;
 
@@ -31,6 +36,9 @@ const config = {
     },
     client: {
         url: CLIENT_URL || '',
+    },
+    users_microservice: {
+        url: USERS_MICROSERVICE_URL || '',
     },
 };
 
