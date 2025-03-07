@@ -7,6 +7,6 @@ export interface Favorites extends Document {
   Type: string;
   Poster: string;
   description?: string;
-  descriptions: mongoose.Types.ObjectId[];
+  descriptions?: mongoose.Types.ObjectId[];
   usersIds: Types.ObjectId[];
 }

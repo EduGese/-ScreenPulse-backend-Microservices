@@ -1,6 +1,6 @@
 import { Types } from "mongoose";
-import { Favorites } from "../interfaces/favorite.interface";
-import favoritesSchema from "../model/favorites.model";
+import { Favorites } from "../domain/interfaces/favorite.interface";
+import favoritesSchema from "../domain/models/favorites.model";
 import axios from "axios";
 import config from "../config/config";
 

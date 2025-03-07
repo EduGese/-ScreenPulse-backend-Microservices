@@ -1,12 +1,12 @@
-import { Favorites } from "../interfaces/favorite.interface";
-import favoritesSchema from "../model/favorites.model";
-import descriptionSchema from "../model/description.model";
+import { Favorites } from "../domain/interfaces/favorite.interface";
+import favoritesSchema from "../domain/models/favorites.model";
+import descriptionSchema from "../domain/models/description.model";
 import {
   validateInputs,
   doesUserExist,
   findFavoriteByImdbId,
   addUserToFavorite
-} from "../helpers/favorites.helpers";
+} from "./favorites.utils";
 
 
 class FavoritesService {
@@ -18,7 +18,7 @@ class FavoritesService {
       throw new Error("User not found");
     }
 
-    // Verificar si la película ya existe como favorita en la colección
+    // Verificar si la película ya existe como favorita en la coleccion
     let favorite = await findFavoriteByImdbId(movie.imdbID);
 
     //verificar si existe favorite, sino se crea

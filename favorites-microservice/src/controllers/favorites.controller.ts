@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 
-import { Favorites } from "../interfaces/favorite.interface";
+import { Favorites } from "../domain/interfaces/favorite.interface";
 import favoritesService from "../services/favorite.service";
-import { Description } from "../interfaces/description.interface";
+import { Description } from "../domain/interfaces/description.interface";
 
 class FavoritesController {
     
@@ -36,7 +36,6 @@ class FavoritesController {
       }
       res.status(500).json({error: 'Unknown error', message: error.message});
       return;
-         //  next(error);
       }
     }
   
