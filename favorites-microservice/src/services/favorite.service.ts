@@ -1,31 +1,23 @@
 import { Favorites } from "../domain/interfaces/favorite.interface";
-import favoritesSchema from "../domain/models/favorites.model";
 import descriptionSchema from "../domain/models/description.model";
+import  mongoFavoritesRepository  from "../repository/favorites.repository";
 import {
   validateInputs,
   doesUserExist,
-  findFavoriteByImdbId,
-  addUserToFavorite
 } from "./favorites.utils";
 
 
 class FavoritesService {
-  async createFavorite(userId: string, movie: Favorites): Promise<Favorites> {
+  async addFavoriteForUser(userId: string, movie: Favorites): Promise<Favorites> {
     validateInputs(userId, movie);
 
-    //Comprobacion si existe el usuario
     if (!(await doesUserExist(userId))) {
       throw new Error("User not found");
     }
 
-    // Verificar si la película ya existe como favorita en la coleccion
-    let favorite = await findFavoriteByImdbId(movie.imdbID);
+    let favorite = await mongoFavoritesRepository.findOrCreate(movie);
 
-    //verificar si existe favorite, sino se crea
-    if (!favorite) {
-      favorite = await favoritesSchema.create(movie);
-    }
-    return await addUserToFavorite(favorite, userId);
+    return mongoFavoritesRepository.addFavoriteForUser(favorite.id, userId);
   }
 
 
