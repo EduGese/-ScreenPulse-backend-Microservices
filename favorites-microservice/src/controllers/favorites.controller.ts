@@ -1,8 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-
-import { Favorites } from "../domain/interfaces/favorite.interface";
 import favoritesService from "../services/favorite.service";
-import { Description } from "../domain/interfaces/description.interface";
 
 class FavoritesController {
     
@@ -14,7 +11,7 @@ class FavoritesController {
      * @param {express.Next} next is the middleware to continue with code execution
      * @returns {Object}  created document
      */
-  async createFavorite(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async addFavorite(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       if (
         !req.body ||
@@ -23,7 +20,7 @@ class FavoritesController {
         res.status(400).json(error);
         return;
       }
-      const createdFavorite = await favoritesService.createFavorite(req.params.id, req.body)
+      const createdFavorite = await favoritesService.addFavoriteForUser(req.params.user_id, req.body)
       res.status(201).json({ message: 'Element saved succesfully', data: createdFavorite });
     } catch (error:any) {
       if (error.message === 'Invalid input type') {
