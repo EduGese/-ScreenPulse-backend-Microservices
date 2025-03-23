@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
 import UserService from "../services/user.service";
+import mongoose from "mongoose";
 
 class UserController {
 
@@ -36,6 +37,11 @@ class UserController {
     try {
       const userId = req.params.userId;
       console.log("UserId",userId);
+      //Validacion del tipo userId como ObjectId de mongoose--> moverlo a un middleware de validacion
+      if (!mongoose.Types.ObjectId.isValid(userId)) {
+         res.status(400).json({ error: "Invalid user ID format" });
+         return;
+      }
       const response = await UserService.verifyUserExist(userId);
       console.log("Response",response);
       res.json(response);
