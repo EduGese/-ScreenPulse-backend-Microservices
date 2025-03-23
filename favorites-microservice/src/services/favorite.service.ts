@@ -1,22 +1,12 @@
 import { Favorites } from "../domain/interfaces/favorite.interface";
 import descriptionSchema from "../domain/models/description.model";
 import  mongoFavoritesRepository  from "../repository/favorites.repository";
-import {
-  validateInputs,
-  doesUserExist,
-} from "./favorites.utils";
+
 
 
 class FavoritesService {
   async addFavoriteForUser(userId: string, movie: Favorites): Promise<Favorites> {
-    validateInputs(userId, movie);
-
-    if (!(await doesUserExist(userId))) {
-      throw new Error("User not found");
-    }
-
     let favorite = await mongoFavoritesRepository.findOrCreate(movie);
-
     return mongoFavoritesRepository.addFavoriteForUser(favorite.id, userId);
   }
 

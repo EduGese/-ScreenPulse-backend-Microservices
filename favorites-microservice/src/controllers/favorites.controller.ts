@@ -13,14 +13,7 @@ class FavoritesController {
      */
   async addFavorite(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      if (
-        !req.body ||
-         typeof req.body !== 'object' || Object.keys(req.body).length === 0) {//Check that body is undefined or null, is an object type and not empty
-        const error = new Error('A non-empty JSON body is mandatory.');
-        res.status(400).json(error);
-        return;
-      }
-      const createdFavorite = await favoritesService.addFavoriteForUser(req.params.user_id, req.body)
+      const createdFavorite = await favoritesService.addFavoriteForUser(req.params.userId, req.body)
       res.status(201).json({ message: 'Element saved succesfully', data: createdFavorite });
     } catch (error:any) {
       if (error.message === 'Invalid input type') {
@@ -49,11 +42,12 @@ class FavoritesController {
   //   try {
       
   //     const favorites: Favorites[] = await favoritesService.getFavorites(req.params.id);
-  //     const favoritesWithDescriptions: any[] = await Promise.all(favorites.map(async (favorite) => {
-  //       const descriptions: Description[] = await favoritesService.getDescriptions(req.params.id, favorite._id); // Obtener las descripciones asociadas con el favorito
-  //       return { ...favorite.toObject(), descriptions }; // Agregar las descripciones al objeto de favorito y convertirlo a un objeto JavaScript plano
-  //   }));
-  //   res.status(200).json(favoritesWithDescriptions); // Enviar la lista de favoritos actualizada al frontend
+  //   //   const favoritesWithDescriptions: any[] = await Promise.all(favorites.map(async (favorite) => {
+  //   //     const descriptions: Description[] = await favoritesService.getDescriptions(req.params.id, favorite._id); // Obtener las descripciones asociadas con el favorito
+  //   //     return { ...favorite.toObject(), descriptions }; // Agregar las descripciones al objeto de favorito y convertirlo a un objeto JavaScript plano
+  //   // }));
+  //   //res.status(200).json(favoritesWithDescriptions); // Enviar la lista de favoritos actualizada al frontend
+  //   res.status(200).json(favorites);
   //   } catch (error:any) {
   //     if (error.message === 'Invalid input type') {
   //       res.status(400).json({ error:'Bad request', message: error.message });
