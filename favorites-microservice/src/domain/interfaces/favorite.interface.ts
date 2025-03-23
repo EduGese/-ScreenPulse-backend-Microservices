@@ -1,11 +1,11 @@
 import mongoose, { Document, Types } from 'mongoose';
 
 export interface Favorites extends Document {
-  Title: string;
-  Year: string;
+  title: string;
+  year: string;
   imdbID: string;
-  Type: string;
-  Poster: string;
+  type: string;
+  poster: string;
   description?: string;
   descriptions?: mongoose.Types.ObjectId[];
   usersIds: Types.ObjectId[];

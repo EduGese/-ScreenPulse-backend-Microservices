@@ -2,11 +2,11 @@ import mongoose, { Schema } from 'mongoose';
 import { Favorites } from '../interfaces/favorite.interface';
 
 const favoritesSchema: Schema = new mongoose.Schema({
-    Title: {
+    title: {
         type: String,
         required: true
     },
-    Year: {
+    year: {
         type: String,
         required: true
     },
@@ -15,11 +15,11 @@ const favoritesSchema: Schema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    Type: {
+    type: {
         type: String,
         required: true
     },
-    Poster: {
+    poster: {
         type: String,
         required: true
     },
